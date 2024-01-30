@@ -1,0 +1,88 @@
+<!-- register.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Register</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <form id="registerForm">
+        <h2>Register</h2>
+        <label for="companyName">Company Name:</label>
+        <input type="text" id="companyName" name="companyName" required>
+
+        <label for="companyDescription">Company Description:</label>
+        <textarea id="companyDescription" name="companyDescription" required></textarea>
+
+        <label for="email">Email:</label>
+        <input type="email" id="email" name="email" required>
+
+        <label for="name">Name:</label>
+        <input type="text" id="name" name="name" required>
+
+        <label for="password">Password:</label>
+        <input type="password" id="password" name="password" required>
+
+        <button type="button" onclick="submitForm()">Register</button>
+
+        <p class="errorMsg" id="registerError" style="display: none;">Please fill in all fields.</p>
+
+        <p>Already have an account? <a href="login.html">Login</a></p>
+    </form>
+
+    <script>
+        function submitForm() {
+            var companyName = document.getElementById('companyName').value;
+            var companyDescription = document.getElementById('companyDescription').value;
+            var email = document.getElementById('email').value;
+            var name = document.getElementById('name').value;
+            var password = document.getElementById('password').value;
+
+            // Basic email format validation
+            var emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            if (!emailRegex.test(email)) {
+                alert('Invalid email format');
+                return;
+            }
+
+            // Create a data object with form values
+            var formData = {
+                "companyName": companyName,
+                "companyDescription": companyDescription,
+                "employeeName": name,
+                "email": email,
+                "password": password
+            };
+             console.log(formData)
+            // Send the form data to the backend using a POST request
+            fetch('https://2c21-182-176-157-31.ngrok-free.app/company/register', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(formData)
+            })
+            .then(response => {
+                // if (response.ok) {
+                //     // Redirect to login page or perform other actions
+                //     alert('Registration successful! Redirecting to login page...');
+                //     // window.location.href = 'login.html';
+                // } else {
+                //     // Handle error response from the server
+                //     throw new Error('Failed to register. Please try again.');
+                // }
+                return response.json()
+            })
+            .then(e=>{
+                console.log(e);
+            })
+            .catch(error => {
+                console.error('Error:', error.message);
+                alert('Failed to register. Please try again.');
+            });
+        }
+    </script>
+</body>
+</html>

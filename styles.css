@@ -1,0 +1,110 @@
+/* styles.css */
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #f2f2f2;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    margin: 0;
+}
+
+form {
+    width: 350px;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+    background-color: #ffffff;
+}
+
+h2 {
+    margin-bottom: 20px;
+    color: #333333;
+    text-align: center;
+}
+
+label {
+    display: block;
+    margin-bottom: 8px;
+    color: #555555;
+}
+
+input, textarea, select {
+    width: calc(100% - 16px);
+    padding: 10px;
+    margin-bottom: 16px;
+    border: 1px solid #cccccc;
+    border-radius: 5px;
+    box-sizing: border-box;
+    font-size: 16px;
+}
+
+button {
+    width: 100%;
+    padding: 12px;
+    background-color: #4CAF50;
+    color: #ffffff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.3s ease;
+}
+
+button:hover {
+    background-color: #45a049;
+}
+
+p {
+    margin-top: 20px;
+    text-align: center;
+    color: #666666;
+}
+
+a {
+    color: #007BFF;
+    text-decoration: none;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
+.errorMsg {
+    color: #ff0000;
+    display: none;
+}
+
+/* Style for the checkbox container */
+.checkbox-container {
+    margin-bottom: 16px;
+    display: flex;
+    flex-wrap: wrap; /* Allow checkboxes to wrap to the next line */
+    align-items: center;
+}
+
+/* Style for individual checkboxes */
+.checkbox-container input[type="checkbox"] {
+    margin-right: 5px;
+    margin-bottom: 5px;
+}
+
+/* Style for the checkbox label */
+.checkbox-container label {
+    margin-bottom: 0;
+    margin-right: 10px;
+    flex-grow: 1;
+    color: #555555;
+}
+
+/* Style for the checked state of the checkbox */
+.checkbox-container input[type="checkbox"]:checked {
+    accent-color: #4CAF50;
+    background-color: #4CAF50;
+}
+
+/* Style for the checkbox label when checked */
+.checkbox-container input[type="checkbox"]:checked + label {
+    color: #4CAF50;
+}

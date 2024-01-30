@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Employee Registration</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <form id="employeeRegisterForm">
+        <h2>Employee Registration</h2>
+        <label for="employeeName">Name:</label>
+        <input type="text" id="employeeName" name="employeeName" required>
+
+        <label for="employeeEmail">Email:</label>
+        <input type="email" id="employeeEmail" name="employeeEmail" required>
+
+        <label for="employeePassword">Password:</label>
+        <input type="password" id="employeePassword" name="employeePassword" required>
+
+        <label for="employeeDepartment">Department:</label>
+        <select id="employeeDepartment" name="employeeDepartment" required>
+            <option value="">Select Department</option>
+            <option value="Admin">Admin</option>
+            <option value="Marketing">Marketing</option>
+            <option value="Sales">Sales</option>
+            <option value="Production">Production</option>
+            <option value="Legal">Legal</option>
+        </select>
+
+        <label for="employeeCompanyName">Company Name:</label>
+        <input type="text" id="employeeCompanyName" name="employeeCompanyName" required>
+
+        <button type="button" onclick="validateEmployeeRegistration()">Register</button>
+
+        <p class="errorMsg" id="employeeRegisterError" style="display: none;">Please fill in all fields.</p>
+
+    </form>
+
+    <script>
+        function validateEmployeeRegistration() {
+            var employeeName = document.getElementById('employeeName').value;
+            var employeeEmail = document.getElementById('employeeEmail').value;
+            var employeePassword = document.getElementById('employeePassword').value;
+            var employeeDepartment = document.getElementById('employeeDepartment').value;
+            var employeeCompanyName = document.getElementById('employeeCompanyName').value;
+
+            // Basic email format validation
+            var emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            if (!emailRegex.test(employeeEmail)) {
+                alert('Invalid email format');
+                return;
+            }
+
+            // Create a data object with employee registration values
+            var formData = {
+                "employeeName": employeeName,
+                "email": employeeEmail,
+                "password": employeePassword,
+                "departmentName": employeeDepartment,
+                "companyName": employeeCompanyName
+            };
+
+            // Send the employee registration data to the backend using a POST request
+            fetch('https://2c21-182-176-157-31.ngrok-free.app/auth/signup', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(formData)
+            })
+            .then(response => {
+                //if (response.ok) {
+                    // Redirect to login page after successful registration
+                   // alert('Employee registration successful! Redirecting to login page...');
+                   // window.location.href = 'login.html';
+                //} else {
+                    // Handle error response from the server
+                    //throw new Error('Failed to register. Please try again.');
+                //}
+                return response.json()
+            })
+            .then(e=>{
+                console.log(e);
+            })
+            .catch(error => {
+                console.error('Error:', error.message);
+                alert('Failed to register. Please try again.');
+            });
+        }
+    </script>
+</body>
+</html>
